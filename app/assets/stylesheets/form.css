@@ -12,7 +12,13 @@ form {
 }
 
 .remember-me {
-  margin-block: 10px;
+  margin-top: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 form input[type=text],
@@ -28,6 +34,7 @@ form input[type=password] {
   padding: 8px;
   border: none;
   text-transform: uppercase;
+  margin-block: 10px;
 }
 
 .heading-form {

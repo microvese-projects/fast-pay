@@ -1,1 +1,1 @@
-json.array! @dealings, partial: "dealings/dealing", as: :dealing
+json.array! @dealings, partial: 'dealings/dealing', as: :dealing

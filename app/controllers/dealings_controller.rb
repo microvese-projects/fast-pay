@@ -1,5 +1,5 @@
 class DealingsController < ApplicationController
-  before_action :set_dealing, only: %i[ show edit update destroy ]
+  before_action :set_dealing, only: %i[show edit update destroy]
 
   # GET /dealings or /dealings.json
   def index
@@ -7,8 +7,7 @@ class DealingsController < ApplicationController
   end
 
   # GET /dealings/1 or /dealings/1.json
-  def show
-  end
+  def show; end
 
   # GET /dealings/new
   def new
@@ -16,8 +15,7 @@ class DealingsController < ApplicationController
   end
 
   # GET /dealings/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /dealings or /dealings.json
   def create
@@ -25,7 +23,7 @@ class DealingsController < ApplicationController
 
     respond_to do |format|
       if @dealing.save
-        format.html { redirect_to dealing_url(@dealing), notice: "Dealing was successfully created." }
+        format.html { redirect_to dealing_url(@dealing), notice: 'Dealing was successfully created.' }
         format.json { render :show, status: :created, location: @dealing }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +36,7 @@ class DealingsController < ApplicationController
   def update
     respond_to do |format|
       if @dealing.update(dealing_params)
-        format.html { redirect_to dealing_url(@dealing), notice: "Dealing was successfully updated." }
+        format.html { redirect_to dealing_url(@dealing), notice: 'Dealing was successfully updated.' }
         format.json { render :show, status: :ok, location: @dealing }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +50,20 @@ class DealingsController < ApplicationController
     @dealing.destroy
 
     respond_to do |format|
-      format.html { redirect_to dealings_url, notice: "Dealing was successfully destroyed." }
+      format.html { redirect_to dealings_url, notice: 'Dealing was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dealing
-      @dealing = Dealing.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def dealing_params
-      params.require(:dealing).permit(:name, :amount, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dealing
+    @dealing = Dealing.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def dealing_params
+    params.require(:dealing).permit(:name, :amount, :user_id)
+  end
 end

@@ -25,13 +25,16 @@ form input[type=password] {
   padding: 5px;
 }
 
-.actions .sign-in {
+.actions .sign-in,
+.actions input[type=submit] {
   width: 100%;
   border-radius: 3px;
   padding: 8px;
   border: none;
   text-transform: uppercase;
   margin-block: 10px;
+  background-color: #3778c2;
+  color: white;
 }
 
 .heading-form {

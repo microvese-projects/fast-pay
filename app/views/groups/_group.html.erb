@@ -1,17 +1,16 @@
-<div id="<%= dom_id group %>">
-  <p>
-    <strong>Name:</strong>
-    <%= group.name %>
-  </p>
-
-  <p>
-    <strong>Icon:</strong>
-    <%= group.icon %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= group.user_id %>
-  </p>
-
+<div id="<%= dom_id group %>" class='group-detail-summary' >
+  <%= image_tag group.icon, class: 'icon' %>
+  <div>
+    <div class='header-detail'>
+      <strong class='group-name'><%= group.name %></strong>
+      <span>$<%= total(group.dealings) %></span>
+    </div>
+    <% sorted_dealings = group.dealings.order(created_at: :desc) %>
+    <% latest_dealing_date = sorted_dealings.first.try(:created_at) %>
+    <% if latest_dealing_date %>
+      <p><%= latest_dealing_date.to_date %></p>
+    <% else %>
+      <p>No dealings!</p>
+    <% end %>
+  </div>
 </div>

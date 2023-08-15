@@ -78,3 +78,5 @@ group :test do
   gem 'capybara'
   gem 'faker'
 end
+
+gem 'devise'

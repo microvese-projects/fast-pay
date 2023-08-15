@@ -32,3 +32,21 @@
 .register {
   color: black;
 }
+
+@media only screen and (min-width: 768px) {
+  #splash-page {
+    max-height: 500px;
+    width: 500px;
+    margin: 0 auto;
+    place-items: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+  }
+
+  #splash-page h1 {
+    font-size: 3rem;
+  }
+}

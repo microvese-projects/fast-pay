@@ -1,15 +1,22 @@
-<h1>Groups</h1>
-<%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+<div class='header'>
+  <h2 class='heading-form'>Groups</h2>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: 'sign-out' %>
+</div>
 
 <p style="color: green"><%= notice %></p>
 
 <div id="groups">
-  <% @groups.each do |group| %>
-    <%= render group %>
-    <p>
-      <%= link_to "Show this group", user_group_path(current_user, group) %>
-    </p>
+  <% if @groups.empty? %>
+    <p>No groups added!</p> 
+  <% else %>
+    <% @groups.each do |group| %>
+      <%= link_to user_group_path(current_user, group), class: 'group-link' do %>
+        <div class='group'>
+          <%= render group %>
+        </div>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 
-<%= link_to "New group", new_user_group_path %>
+<%= link_to "New group", new_user_group_path, class: 'new-group' %>

@@ -21,6 +21,7 @@
       </svg>
     <% end %>
   </div>
+  <hr />
   <div class='transactions'>
     <% if @dealings.size > 0 %>
       <ul>
@@ -29,6 +30,7 @@
             <span><%= dealing.name %></span>
             <span><%= dealing.created_at.to_date %></span>
           </li>
+          <hr />
         <% end %>
       </ul>
     <% else %>

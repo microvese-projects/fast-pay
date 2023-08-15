@@ -1,6 +1,32 @@
+<div class='header'>
+  <h2 class='heading-form'>Details</h2>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: 'sign-out' %>
+</div>
+
 <p style="color: green"><%= notice %></p>
 
-<%= render @group %>
+<div class='details'>
+  <div class='group-detail-summary'>
+    <%= image_tag @group.icon, class: 'icon' %>
+    <div class='header-detail'>
+      <strong class='group-name'><%= @group.name %></strong>
+    </div>
+  </div>
+  <div class='transactions'>
+    <% if @group.dealings.size > 0 %>
+      <ul>
+        <% @group.dealings.each do |dealing| %>
+          <li>
+            <span><%= dealing.name %></span>
+            <span><%= dealing.created_at.to_date %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No dealings recorded</p>
+    <% end %>
+  </div>
+</div>
 
 <div>
   <%= link_to "Edit this group", edit_user_group_path(current_user, @group) %> |

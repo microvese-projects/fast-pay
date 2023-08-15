@@ -29,7 +29,8 @@
   align-items: center;
 }
 
-.new-group {
+.new-group,
+.new-dealing {
   text-decoration: none;
   background-color: #5fb523;
   color: white;
@@ -39,10 +40,41 @@
   bottom: 0;
   width: 100%;
   text-align: center;
+  border: none;
+}
+
+.trash {
+  height: 30px;
+  width: max-content;
+  position: absolute;
+  right: 20px;
+  background-color: transparent;
+  border: none;
+  color: red;
+}
+
+.trash-icon {
+  height: 100%;
+}
+
+.details {
+  background-color: white;
+  margin: 15px 10px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification {
+  display: grid;
+  place-items: center;
+  height: 100%;
 }
 
 @media only screen and (min-width: 768px) {
-  .new-group {
+  .new-group,
+  .new-dealing {
     font-size: 1.2rem;
   }
 }

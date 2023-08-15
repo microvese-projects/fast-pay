@@ -1,4 +1,7 @@
 <div class='header'>
+  <%= link_to root_path, class: 'back-btn' do %>
+    <i class="fas fa-arrow-left"></i>
+  <% end%>
   <h2 class='heading-form'>Details</h2>
   <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: 'sign-out' %>
 </div>
@@ -10,6 +13,7 @@
     <%= image_tag @group.icon, class: 'icon' %>
     <div class='header-detail'>
       <strong class='group-name'><%= @group.name %></strong>
+      <span>$ <%= total(@dealings) %></span>
     </div>
     <%= button_to user_group_path(current_user, @group), method: :delete, class: 'trash' do %>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 trash-icon">
@@ -36,7 +40,6 @@
 </div>
 
 <div>
-  <%= link_to "Edit this group", edit_user_group_path(current_user, @group) %> |
-  <%= link_to "Back to groups", user_groups_path(current_user) %>
+  <%= link_to "Edit this group", edit_user_group_path(current_user, @group) %>
   <%= button_to "New Dealing",  new_user_group_dealing_path(current_user, @group), method: :get, class: 'new-dealing' %>
 </div>

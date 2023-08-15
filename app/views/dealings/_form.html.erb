@@ -1,4 +1,4 @@
-<%= form_with(model: dealing) do |form| %>
+<%= form_with(model: dealing, url: user_group_dealings_path(current_user, params[:group_id])) do |form| %>
   <% if dealing.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(dealing.errors.count, "error") %> prohibited this dealing from being saved:</h2>

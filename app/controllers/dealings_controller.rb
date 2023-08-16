@@ -20,7 +20,9 @@ class DealingsController < ApplicationController
         group = Group.find(params[:group_id])
         group.dealings << @dealing
 
-        format.html { redirect_to user_group_path(current_user, params[:group_id]), notice: 'Dealing was successfully created.' }
+        format.html do
+          redirect_to user_group_path(current_user, params[:group_id]), notice: 'Dealing was successfully created.'
+        end
         format.json { render :show, status: :created, location: @dealing }
       else
         format.html { render :new, status: :unprocessable_entity }

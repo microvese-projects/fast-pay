@@ -25,16 +25,24 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
+    @groups = Group.where(user_id: params[:user_id]).includes(:dealings)
     @group = Group.new(group_params)
-    @group.user_id = params[:user_id]
 
-    respond_to do |format|
-      if @group.save
-        format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully created.' }
-        format.json { render :show, status: :created, location: @group }
+    Group.transaction do
+      if @groups.any? { |group| group.name == @group.name }
+        redirect_to user_groups_path(current_user), alert: 'Group already exists!'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
+        @group.user_id = params[:user_id]
+
+        respond_to do |format|
+          if @group.save
+            format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully created.' }
+            format.json { render :show, status: :created, location: @group }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @group.errors, status: :unprocessable_entity }
+          end
+        end
       end
     end
   end

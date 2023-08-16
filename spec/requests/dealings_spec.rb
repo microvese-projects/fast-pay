@@ -9,6 +9,11 @@ RSpec.describe '/dealings', type: :request do
     @group = FactoryBot.create(:group, user:)
   end
 
+  after do
+    Dealing.destroy_all
+    User.destroy_All
+  end
+
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_user_group_dealing_path(user, @group)

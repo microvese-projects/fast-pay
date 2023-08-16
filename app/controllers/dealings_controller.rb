@@ -21,10 +21,11 @@ class DealingsController < ApplicationController
   # POST /dealings or /dealings.json
   def create
     @dealing = Dealing.new(dealing_params)
+    @dealing.author = current_user
 
     respond_to do |format|
       if @dealing.save
-        format.html { redirect_to dealing_url(@dealing), notice: 'Dealing was successfully created.' }
+        format.html { redirect_to user_group_path(current_user, params[:group_id]), notice: 'Dealing was successfully created.' }
         format.json { render :show, status: :created, location: @dealing }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +66,6 @@ class DealingsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def dealing_params
-    params.require(:dealing).permit(:name, :amount, :user_id)
+    params.require(:dealing).permit(:name, :amount)
   end
 end

@@ -13,12 +13,12 @@ RSpec.describe Dealing, type: :model do
       dealing = build(:dealing, author: user)
       expect(dealing).to be_valid
     end
-    
+
     it 'invalidates dealings with no names' do
       dealing = build(:dealing, name: nil, author: user)
       expect(dealing).to_not be_valid
     end
-    
+
     it 'invalidates dealings with no amount' do
       dealing = build(:dealing, amount: nil, author: user)
       expect(dealing).to_not be_valid

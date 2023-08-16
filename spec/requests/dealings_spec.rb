@@ -6,7 +6,7 @@ RSpec.describe '/dealings', type: :request do
   before do
     user.save
     sign_in user
-    @group = FactoryBot.create(:group, user: user)
+    @group = FactoryBot.create(:group, user:)
   end
 
   describe 'GET /new' do
@@ -21,25 +21,25 @@ RSpec.describe '/dealings', type: :request do
     context 'with valid parameters' do
       it 'creates a new Dealing' do
         expect do
-          post user_group_dealings_path(user, @group), params: { dealing: {name: 'test', amount: 20} }
+          post user_group_dealings_path(user, @group), params: { dealing: { name: 'test', amount: 20 } }
         end.to change(Dealing, :count).by(1)
       end
 
       it 'redirects to the created dealing' do
-        post user_group_dealings_path(user, @group), params: { dealing: {name: 'test', amount: 20} }
+        post user_group_dealings_path(user, @group), params: { dealing: { name: 'test', amount: 20 } }
         expect(response).to redirect_to(user_group_path(user, @group))
       end
     end
-    
+
     context 'with invalid parameters' do
       it 'does not create a new Dealing' do
         expect do
-          post user_group_dealings_path(user, @group), params: { dealing: {name: nil, amount: 20} }
+          post user_group_dealings_path(user, @group), params: { dealing: { name: nil, amount: 20 } }
         end.to change(Dealing, :count).by(0)
       end
-      
+
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post user_group_dealings_path(user, @group), params: { dealing: {name: nil, amount: 20} }
+        post user_group_dealings_path(user, @group), params: { dealing: { name: nil, amount: 20 } }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

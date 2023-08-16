@@ -10,24 +10,24 @@ RSpec.describe Group, type: :model do
 
   describe 'validations' do
     it 'is valid with valid attributes' do
-      group = build(:group, user: user)
+      group = build(:group, user:)
       expect(group).to be_valid
     end
 
     it 'is not valid without a name' do
-      group = build(:group, name: nil, user: user)
+      group = build(:group, name: nil, user:)
       expect(group).not_to be_valid
     end
 
     it 'is not valid without an icon' do
-      group = build(:group, icon: nil, user: user)
+      group = build(:group, icon: nil, user:)
       expect(group).not_to be_valid
     end
   end
 
   describe 'associations' do
     let(:user) { create(:user) }
-    let(:group) { create(:group, user: user) }
+    let(:group) { create(:group, user:) }
 
     it 'belongs to a user' do
       expect(group.user).to eq(user)

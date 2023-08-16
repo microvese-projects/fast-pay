@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'splash/index.html.erb', type: :feature do
-  let(:user) { create(:user) }
-
   scenario 'shows login' do
     visit root_path
     

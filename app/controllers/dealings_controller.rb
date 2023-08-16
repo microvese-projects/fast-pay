@@ -1,14 +1,6 @@
 class DealingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_dealing, only: %i[show edit update destroy]
-
-  # GET /dealings or /dealings.json
-  def index
-    @dealings = Dealing.all
-  end
-
-  # GET /dealings/1 or /dealings/1.json
-  def show; end
+  before_action :set_dealing, only: %i[edit update destroy]
 
   # GET /dealings/new
   def new
@@ -52,7 +44,7 @@ class DealingsController < ApplicationController
     @dealing.destroy
 
     respond_to do |format|
-      format.html { redirect_to dealings_url, notice: 'Dealing was successfully destroyed.' }
+      format.html { redirect_to user_group_path, notice: 'Dealing was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

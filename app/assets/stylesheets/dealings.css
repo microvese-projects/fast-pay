@@ -1,0 +1,19 @@
+.details li {
+  padding: 10px;
+}
+
+.calendar {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: grey;
+}
+
+.calendar svg {
+  height: 100%;
+}
+
+.detail-heading {
+  margin-bottom: 5px;
+}

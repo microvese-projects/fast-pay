@@ -13,8 +13,8 @@
   <div class='group-detail-summary'>
     <%= image_tag @group.icon, class: 'icon' %>
     <div class='header-detail'>
-      <strong class='group-name'><%= @group.name %></strong>
-      <span>$ <%= total(@dealings) %></span>
+      <span class='group-name'><%= @group.name %> </span>
+      <strong> $<%= total(@dealings) %></strong>
     </div>
     <%= button_to user_group_path(current_user, @group), method: :delete, class: 'trash' do %>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 trash-icon">

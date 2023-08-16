@@ -13,45 +13,19 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/dealings', type: :request do
-  # This should return the minimal set of attributes required to create a valid
-  # Dealing. As you add validations to Dealing, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
-  end
+  let(:user) { create(:user) }
 
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
-
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      Dealing.create! valid_attributes
-      get dealings_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      dealing = Dealing.create! valid_attributes
-      get dealing_url(dealing)
-      expect(response).to be_successful
-    end
+  before do
+    user.save
+    sign_in user
+    @group = FactoryBot.create(:group, user: user)
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      get new_dealing_url
+      get new_user_group_dealing_path(user, @group)
       expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /edit' do
-    it 'renders a successful response' do
-      dealing = Dealing.create! valid_attributes
-      get edit_dealing_url(dealing)
-      expect(response).to be_successful
+      expect(response.body).to include('Create Dealing')
     end
   end
 
@@ -59,72 +33,42 @@ RSpec.describe '/dealings', type: :request do
     context 'with valid parameters' do
       it 'creates a new Dealing' do
         expect do
-          post dealings_url, params: { dealing: valid_attributes }
+          post user_group_dealings_path(user, @group), params: { dealing: {name: 'test', amount: 20} }
         end.to change(Dealing, :count).by(1)
       end
 
       it 'redirects to the created dealing' do
-        post dealings_url, params: { dealing: valid_attributes }
-        expect(response).to redirect_to(dealing_url(Dealing.last))
+        post user_group_dealings_path(user, @group), params: { dealing: {name: 'test', amount: 20} }
+        expect(response).to redirect_to(user_group_path(user, @group))
       end
     end
-
+    
     context 'with invalid parameters' do
       it 'does not create a new Dealing' do
         expect do
-          post dealings_url, params: { dealing: invalid_attributes }
+          post user_group_dealings_path(user, @group), params: { dealing: {name: nil, amount: 20} }
         end.to change(Dealing, :count).by(0)
       end
-
+      
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post dealings_url, params: { dealing: invalid_attributes }
+        post user_group_dealings_path(user, @group), params: { dealing: {name: nil, amount: 20} }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
-  describe 'PATCH /update' do
-    context 'with valid parameters' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
-      end
+  # describe 'DELETE /destroy' do
+  #   it 'destroys the requested dealing' do
+  #     dealing = Dealing.create! valid_attributes
+  #     expect do
+  #       delete dealing_url(dealing)
+  #     end.to change(Dealing, :count).by(-1)
+  #   end
 
-      it 'updates the requested dealing' do
-        dealing = Dealing.create! valid_attributes
-        patch dealing_url(dealing), params: { dealing: new_attributes }
-        dealing.reload
-        skip('Add assertions for updated state')
-      end
-
-      it 'redirects to the dealing' do
-        dealing = Dealing.create! valid_attributes
-        patch dealing_url(dealing), params: { dealing: new_attributes }
-        dealing.reload
-        expect(response).to redirect_to(dealing_url(dealing))
-      end
-    end
-
-    context 'with invalid parameters' do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        dealing = Dealing.create! valid_attributes
-        patch dealing_url(dealing), params: { dealing: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe 'DELETE /destroy' do
-    it 'destroys the requested dealing' do
-      dealing = Dealing.create! valid_attributes
-      expect do
-        delete dealing_url(dealing)
-      end.to change(Dealing, :count).by(-1)
-    end
-
-    it 'redirects to the dealings list' do
-      dealing = Dealing.create! valid_attributes
-      delete dealing_url(dealing)
-      expect(response).to redirect_to(dealings_url)
-    end
-  end
+  #   it 'redirects to the dealings list' do
+  #     dealing = Dealing.create! valid_attributes
+  #     delete dealing_url(dealing)
+  #     expect(response).to redirect_to(dealings_url)
+  #   end
+  # end
 end

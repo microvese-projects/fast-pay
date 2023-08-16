@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1 or /groups/1.json
   def show
-    @group = Group.find_by(id: params[:id], user_id: params[:user_id])
+    @group = Group.includes(:dealings).find(params[:id])
 
     @dealings = if @group
                   @group.dealings.order(created_at: :desc)

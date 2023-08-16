@@ -1,0 +1,36 @@
+.details li {
+  padding: 10px;
+  display: flex;
+  position: relative;
+}
+
+.calendar {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: grey;
+}
+
+.calendar svg {
+  height: 100%;
+}
+
+.detail-heading {
+  margin-bottom: 5px;
+}
+
+.header-detail {
+  font-size: 1.2rem;
+  align-self: flex-start;
+  display: flex;
+  gap: 100px;
+  min-width: 100px;
+}
+
+.dealing-amount {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  font-weight: 600;
+}

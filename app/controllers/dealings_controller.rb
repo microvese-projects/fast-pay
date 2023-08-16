@@ -1,14 +1,6 @@
 class DealingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_dealing, only: %i[show edit update destroy]
-
-  # GET /dealings or /dealings.json
-  def index
-    @dealings = Dealing.all
-  end
-
-  # GET /dealings/1 or /dealings/1.json
-  def show; end
+  before_action :set_dealing, only: %i[edit update destroy]
 
   # GET /dealings/new
   def new
@@ -21,10 +13,16 @@ class DealingsController < ApplicationController
   # POST /dealings or /dealings.json
   def create
     @dealing = Dealing.new(dealing_params)
+    @dealing.author = current_user
 
     respond_to do |format|
       if @dealing.save
-        format.html { redirect_to dealing_url(@dealing), notice: 'Dealing was successfully created.' }
+        group = Group.find(params[:group_id])
+        group.dealings << @dealing
+
+        format.html do
+          redirect_to user_group_path(current_user, params[:group_id]), notice: 'Dealing was successfully created.'
+        end
         format.json { render :show, status: :created, location: @dealing }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,7 +49,7 @@ class DealingsController < ApplicationController
     @dealing.destroy
 
     respond_to do |format|
-      format.html { redirect_to dealings_url, notice: 'Dealing was successfully destroyed.' }
+      format.html { redirect_to user_group_path, notice: 'Dealing was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +63,6 @@ class DealingsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def dealing_params
-    params.require(:dealing).permit(:name, :amount, :user_id)
+    params.require(:dealing).permit(:name, :amount)
   end
 end

@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: %i[show edit update destroy]
+  before_action :set_group, only: %i[show destroy]
 
   # GET /groups or /groups.json
   def index
@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1 or /groups/1.json
   def show
-    @group = Group.find_by(id: params[:id], user_id: params[:user_id])
+    @group = Group.includes(:dealings).find(params[:id])
 
     @dealings = if @group
                   @group.dealings.order(created_at: :desc)
@@ -23,34 +23,26 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
-  # GET /groups/1/edit
-  def edit; end
-
   # POST /groups or /groups.json
   def create
+    @groups = Group.where(user_id: params[:user_id]).includes(:dealings)
     @group = Group.new(group_params)
-    @group.user_id = params[:user_id]
 
-    respond_to do |format|
-      if @group.save
-        format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully created.' }
-        format.json { render :show, status: :created, location: @group }
+    Group.transaction do
+      if @groups.any? { |group| group.name == @group.name }
+        redirect_to user_groups_path(current_user), alert: 'Group already exists!'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+        @group.user_id = params[:user_id]
 
-  # PATCH/PUT /groups/1 or /groups/1.json
-  def update
-    respond_to do |format|
-      if @group.update(group_params)
-        format.html { redirect_to user_group_path(current_user, @group), notice: 'Group was successfully updated.' }
-        format.json { render :show, status: :ok, location: @group }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          if @group.save
+            format.html { redirect_to user_groups_path(current_user), notice: 'Group was successfully created.' }
+            format.json { render :show, status: :created, location: @group }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @group.errors, status: :unprocessable_entity }
+          end
+        end
       end
     end
   end

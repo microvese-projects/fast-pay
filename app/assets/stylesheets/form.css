@@ -70,6 +70,10 @@ form input[type=password] {
   margin-top: 10px;
 }
 
+.inputs label {
+  display: none;
+}
+
 .actions label {
   display: none;
 }

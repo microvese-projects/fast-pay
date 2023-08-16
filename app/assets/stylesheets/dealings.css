@@ -1,5 +1,7 @@
 .details li {
   padding: 10px;
+  display: flex;
+  position: relative;
 }
 
 .calendar {
@@ -22,6 +24,13 @@
   font-size: 1.2rem;
   align-self: flex-start;
   display: flex;
-  gap: 100%;
+  gap: 100px;
   min-width: 100px;
+}
+
+.dealing-amount {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  font-weight: 600;
 }

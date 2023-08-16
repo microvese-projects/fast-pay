@@ -11,7 +11,8 @@ RSpec.describe '/dealings', type: :request do
 
   after do
     Dealing.destroy_all
-    User.destroy_All
+    Group.destroy_all
+    User.destroy_all
   end
 
   describe 'GET /new' do

@@ -51,6 +51,8 @@
 
 Video Walkthrough [link](https://www.loom.com/share/413c7c0da0b942eb933def649dd8c34a?sid=ffb8908a-9a58-4445-9469-b2e32210d478)
 
+Live project [link](https://fastpay-eozt.onrender.com/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->

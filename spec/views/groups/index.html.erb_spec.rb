@@ -21,9 +21,9 @@ RSpec.describe 'groups/index', type: :feature do
     expect(page).to have_current_path(user_groups_path(user, @group))
     expect(page).to have_content('Food')
     expect(page).to have_content('New group')
-    
+
     click_link 'New group'
-    
+
     expect(page).to have_current_path(new_user_group_path(user))
     expect(page).to have_content('Name')
     expect(page).to have_content('Icon')

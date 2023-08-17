@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @dealing %>
+
+<div>
+  <%= link_to "Edit this dealing", edit_dealing_path(@dealing) %> |
+  <%= link_to "Back to dealings", dealings_path %>
+
+  <%= button_to "Destroy this dealing", @dealing, method: :delete %>
+</div>

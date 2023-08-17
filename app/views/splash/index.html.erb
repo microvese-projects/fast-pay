@@ -1,0 +1,11 @@
+<div id='splash-page'>
+  <p style="color: green"><%= notice %></p>
+  <p style="color: red"><%= alert %></p>
+
+  <h1>Fast Pay</h1>
+
+  <div class='links'>
+    <%= link_to "Log In", new_user_session_path, class: 'sign-in' %>
+    <%= link_to "Sign Up", new_user_registration_path, class: 'register' %>
+  </div>
+</div>

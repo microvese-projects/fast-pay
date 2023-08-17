@@ -1,0 +1,90 @@
+.form-container {
+  display: grid;
+  place-items: center;
+}
+
+form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-container label:not(:last-child) {
+  display: none;
+}
+
+.remember-me {
+  margin-top: 10px;
+}
+
+form input[type=text],
+form input[type=email],
+form input[type=password] {
+  width: 100%;
+  padding: 5px;
+  font-size: 1.1rem;
+}
+
+.actions .sign-in,
+.actions input[type=submit] {
+  width: 100%;
+  border-radius: 3px;
+  padding: 8px;
+  border: none;
+  text-transform: uppercase;
+  margin-block: 10px;
+  background-color: #3778c2;
+  color: white;
+}
+
+.heading-form {
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.header {
+  background-color: #3778c2;
+  width: 100%;
+  position: relative;
+}
+
+.back-btn {
+  color: white;
+  position: absolute;
+  top: 35%;
+  left: 20px;
+}
+
+.extra-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sign-up {
+  text-decoration: none;
+}
+
+.inputs {
+  margin-top: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .form-container h2 {
+    font-size: 3rem;
+  }
+
+  form input[type=text],
+  form input[type=email],
+  form input[type=password],
+  .sign-in {
+    font-size: 1.2rem;
+  }
+}

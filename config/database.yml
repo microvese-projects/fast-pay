@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: fast_pay_production
-  username: fast_pay
-  password: <%= ENV["FAST_PAY_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>

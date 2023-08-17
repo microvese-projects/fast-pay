@@ -1,18 +1,31 @@
 require 'rails_helper'
 
-RSpec.describe 'groups/show', type: :view do
-  before(:each) do
-    assign(:group, Group.create!(
-                     name: 'Name',
-                     icon: 'Icon',
-                     user: nil
-                   ))
+RSpec.describe 'groups/show', type: :feature do
+  let(:user) { create(:user) }
+
+  before do
+    user.save
+    sign_in user
+    @group = FactoryBot.create(:group, name: 'Food', user:)
   end
 
-  it 'renders attributes in <p>' do
-    render
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Icon/)
-    expect(rendered).to match(//)
+  after do
+    Dealing.destroy_all
+    Group.destroy_all
+    User.destroy_all
+  end
+
+  scenario 'shows details of a group' do
+    visit user_group_path(user, @group)
+
+    expect(page).to have_current_path(user_group_path(user, @group))
+    expect(page).to have_content('Details')
+    expect(page).to have_content('New Dealing')
+    expect(page).to have_selector('img')
+
+    click_link 'New Dealing'
+
+    expect(page).to have_current_path(new_user_group_dealing_path(user, @group))
+    expect(page).to have_content('New Dealing')
   end
 end

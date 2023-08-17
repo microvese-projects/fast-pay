@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :dealing do
-    name { 'MyString' }
+    name { 'Pizza' }
     amount { 1.5 }
-    user { nil }
   end
 end

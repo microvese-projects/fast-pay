@@ -1,14 +1,11 @@
 class DealingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_dealing, only: %i[edit update destroy]
+  before_action :set_dealing, only: %i[destroy]
 
   # GET /dealings/new
   def new
     @dealing = Dealing.new
   end
-
-  # GET /dealings/1/edit
-  def edit; end
 
   # POST /dealings or /dealings.json
   def create
@@ -26,19 +23,6 @@ class DealingsController < ApplicationController
         format.json { render :show, status: :created, location: @dealing }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @dealing.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /dealings/1 or /dealings/1.json
-  def update
-    respond_to do |format|
-      if @dealing.update(dealing_params)
-        format.html { redirect_to dealing_url(@dealing), notice: 'Dealing was successfully updated.' }
-        format.json { render :show, status: :ok, location: @dealing }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @dealing.errors, status: :unprocessable_entity }
       end
     end

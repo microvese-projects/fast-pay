@@ -1,23 +1,30 @@
 require 'rails_helper'
 
-RSpec.describe 'dealings/new', type: :view do
-  before(:each) do
-    assign(:dealing, Dealing.new(
-                       name: 'MyString',
-                       amount: 1.5,
-                       user: nil
-                     ))
+RSpec.describe 'dealings/new', type: :feature do
+  let(:user) { create(:user) }
+
+  before do
+    user.save
+    sign_in user
+    @group = FactoryBot.create(:group, user:)
   end
 
-  it 'renders new dealing form' do
-    render
+  after do
+    Dealing.destroy_all
+    Group.destroy_all
+    User.destroy_all
+  end
 
-    assert_select 'form[action=?][method=?]', dealings_path, 'post' do
-      assert_select 'input[name=?]', 'dealing[name]'
+  scenario 'New dealing' do
+    visit new_user_group_dealing_path(user, @group)
+    expect(page).to have_current_path(new_user_group_dealing_path(user, @group))
 
-      assert_select 'input[name=?]', 'dealing[amount]'
+    fill_in 'dealing_name', with: 'Pizza'
+    fill_in 'dealing_amount', with: 10
 
-      assert_select 'input[name=?]', 'dealing[user_id]'
-    end
+    click_button 'Create Dealing'
+
+    expect(page).to have_current_path(user_group_path(user, @group))
+    expect(page).to have_content('Pizza')
   end
 end

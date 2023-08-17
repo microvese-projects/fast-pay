@@ -1,15 +1,20 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the GroupsHelper. For example:
-#
-# describe GroupsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe GroupsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#total' do
+    it 'calculates the total sum of amounts from dealings' do
+      # Create a collection of dummy dealings with different amounts
+      dealings = [
+        double('Dealing', amount: 10),
+        double('Dealing', amount: 20),
+        double('Dealing', amount: 30)
+      ]
+
+      expect(helper.total(dealings)).to eq(60)
+    end
+
+    it 'handles an empty array' do
+      expect(helper.total([])).to eq(0)
+    end
+  end
 end

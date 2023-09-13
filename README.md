@@ -22,7 +22,7 @@
 
 # 📖 Fast Pay App <a name="about-project"></a>
 
-**Fast Pay App** keeps track of all your expenses categorized into sections of common expenditures. A user is amble to use the app to add expenditures based on common features of the expenditure. For example, a user can decide to create a group called Food that will help him classify all transactions that are food related. A total is maintained and the respective dates of each dealing/transaction is also maintained. The app is mainly helful to individuals who find expense tracking to be important and can be used to prepared informed budgets.
+**Fast Pay App** keeps track of all your expenses categorized into sections of common expenditures. A user is able to use the app to add expenditures based on common features of the expenditure. For example, a user can decide to create a group called Food that will help him classify all transactions that are food-related. A total is maintained and the respective dates of each dealing/transaction are also maintained. The app is mainly helpful to individuals who find expense tracking to be important and can be used to prepare informed budgets.
 
 ## 🛠 Built With <a name="built-with"></a>
 
